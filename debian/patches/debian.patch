@@ -1,0 +1,46 @@
+--- a/tool/CMakeLists.txt
++++ b/tool/CMakeLists.txt
+@@ -11,5 +11,5 @@
+ add_executable(corplot corplot.F90)
+ target_link_libraries(fourier key2lower ${LAPACK_LIBRARIES})
+ 
+-install(TARGETS fourier RUNTIME DESTINATION bin)
+-install(TARGETS corplot RUNTIME DESTINATION bin)
++install(TARGETS fourier RUNTIME DESTINATION share/mvmc/tool)
++install(TARGETS corplot RUNTIME DESTINATION share/mvmc/tool)
+--- a/src/mVMC/CMakeLists.txt
++++ b/src/mVMC/CMakeLists.txt
+@@ -21,24 +21,24 @@
+ 
+ link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../pfapack)
+ 
+-add_executable(vmcdry.out vmcdry.c)
+-target_link_libraries(vmcdry.out StdFace m)
+-add_executable(vmc.out ${SOURCES_vmcmain} ${SOURCES_sfmt})
+-target_link_libraries(vmc.out StdFace)
+-target_link_libraries(vmc.out pfapack StdFace ${LAPACK_LIBRARIES} m)
++add_executable(vmcdry vmcdry.c)
++target_link_libraries(vmcdry StdFace m)
++add_executable(vmc ${SOURCES_vmcmain} ${SOURCES_sfmt})
++target_link_libraries(vmc StdFace)
++target_link_libraries(vmc pfapack StdFace ${LAPACK_LIBRARIES} m)
+ 
+ if(USE_SCALAPACK)
+   string(REGEX REPLACE "-L[ ]+" "-L" sc_libs ${SCALAPACK_LIBRARIES})
+   string(REGEX REPLACE "[ ]+" ";" sc_libs ${sc_libs})
+   foreach(sc_lib IN LISTS sc_libs)
+-    target_link_libraries(vmc.out ${sc_lib})
++    target_link_libraries(vmc ${sc_lib})
+   endforeach(sc_lib)
+   message(STATUS "SCALAPACK_LIBRARIES: ${SCALAPACK_LIBRARIES}")
+ endif(USE_SCALAPACK)
+ 
+ if(MPI_FOUND)
+-  target_link_libraries(vmc.out ${MPI_C_LIBRARIES})
++  target_link_libraries(vmc ${MPI_C_LIBRARIES})
+ endif(MPI_FOUND)
+-install(TARGETS vmcdry.out RUNTIME DESTINATION bin)
+-install(TARGETS vmc.out RUNTIME DESTINATION bin)
++install(TARGETS vmcdry RUNTIME DESTINATION bin)
++install(TARGETS vmc RUNTIME DESTINATION bin)
+ add_definitions(-D_mVMC)
