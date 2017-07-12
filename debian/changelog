@@ -1,3 +1,9 @@
+mvmc (1.0.1-2) unstable; urgency=low
+
+  * Use static link instead of shared libraries
+
+ -- Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>  Wed, 12 Jul 2017 15:18:18 +0900
+
 mvmc (1.0.1-1) unstable; urgency=low
 
   * Initial release for mVMC 1.0.1
