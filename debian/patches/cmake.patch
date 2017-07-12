@@ -44,3 +44,24 @@
 +install(TARGETS vmcdry RUNTIME DESTINATION bin)
 +install(TARGETS vmc RUNTIME DESTINATION bin)
  add_definitions(-D_mVMC)
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -13,7 +13,7 @@
+ endif(NOT CMAKE_BUILD_TYPE)
+ message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
+ 
+-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
++option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+ enable_language(C Fortran)
+ 
+ set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+--- a/src/pfapack/CMakeLists.txt
++++ b/src/pfapack/CMakeLists.txt
+@@ -8,7 +8,3 @@
+ include_directories(${MPI_Fortran_INCLUDE_PATH})
+ add_library(pfapack ${SOURCES_PFAPACK})
+ target_link_libraries(pfapack ${MPI_Fortran_LIBRARIES} ${LAPACK_LIBRARIES})
+-install(TARGETS pfapack
+-        ARCHIVE DESTINATION lib
+-        LIBRARY DESTINATION lib
+-        RUNTIME DESTINATION bin)
