@@ -1,3 +1,9 @@
+mvmc (1.0.2-1) unstable; urgency=low
+
+  * New upstream release 1.0.2
+
+ -- Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>  Thu, 02 Nov 2017 15:21:45 +0900
+
 mvmc (1.0.1-2) unstable; urgency=low
 
   * Use static link instead of shared libraries
