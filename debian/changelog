@@ -1,3 +1,15 @@
+mvmc (1.0.3-1) unstable; urgency=low
+
+  * New upstream release 1.0.3
+
+ -- Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>  Wed, 19 Sep 2018 10:06:05 +0900
+
+mvmc (1.0.2-2) unstable; urgency=low
+
+  * Include UHF
+
+ -- Synge Todo <wistaria@phys.s.u-tokyo.ac.jp>  Tue, 28 Aug 2018 15:58:16 +0900
+
 mvmc (1.0.2-1) unstable; urgency=low
 
   * New upstream release 1.0.2

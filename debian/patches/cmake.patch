@@ -1,14 +1,3 @@
---- a/tool/CMakeLists.txt
-+++ b/tool/CMakeLists.txt
-@@ -11,6 +11,6 @@
- add_executable(corplot corplot.F90)
- target_link_libraries(fourier key2lower ${LAPACK_LIBRARIES})
- 
--install(TARGETS fourier RUNTIME DESTINATION bin)
--install(TARGETS corplot RUNTIME DESTINATION bin)
-+install(TARGETS fourier RUNTIME DESTINATION share/mvmc/tool)
-+install(TARGETS corplot RUNTIME DESTINATION share/mvmc/tool)
- 
 --- a/src/mVMC/CMakeLists.txt
 +++ b/src/mVMC/CMakeLists.txt
 @@ -21,24 +21,24 @@
@@ -66,3 +55,11 @@
 -        ARCHIVE DESTINATION lib
 -        LIBRARY DESTINATION lib
 -        RUNTIME DESTINATION bin)
+--- a/src/ComplexUHF/CMakeLists.txt
++++ b/src/ComplexUHF/CMakeLists.txt
+@@ -20,4 +20,4 @@
+ 
+ add_executable(UHF ${SOURCES_UHF} ${SOURCES_sfmt})
+ target_link_libraries(UHF ${LAPACK_LIBRARIES} m)
+-
++install(TARGETS UHF RUNTIME DESTINATION bin)
