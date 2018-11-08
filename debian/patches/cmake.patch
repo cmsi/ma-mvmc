@@ -62,4 +62,23 @@
  add_executable(UHF ${SOURCES_UHF} ${SOURCES_sfmt})
  target_link_libraries(UHF ${LAPACK_LIBRARIES} m)
 -
-+install(TARGETS UHF RUNTIME DESTINATION bin)
++install(TARGETS UHF RUNTIME DESTINATION share/mvmc/tool)
+--- a/tool/CMakeLists.txt
++++ b/tool/CMakeLists.txt
+@@ -10,13 +10,13 @@
+ add_executable(greenr2k greenr2k.F90)
+ target_link_libraries(greenr2k key2lower ${LAPACK_LIBRARIES})
+ 
+-install(TARGETS greenr2k RUNTIME DESTINATION bin)
++install(TARGETS greenr2k RUNTIME DESTINATION share/mvmc/tool)
+ #
+ # Scripts
+ #
+ configure_file(wout2geom.sh wout2geom.sh COPYONLY)
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/wout2geom.sh DESTINATION bin
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/wout2geom.sh DESTINATION share/mvmc/tool
+         PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+ configure_file(respack2wan90.py respack2wan90.py COPYONLY)
+-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/respack2wan90.py DESTINATION bin
++install(FILES ${CMAKE_CURRENT_BINARY_DIR}/respack2wan90.py DESTINATION share/mvmc/tool
+         PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
