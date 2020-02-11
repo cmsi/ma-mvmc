@@ -1,6 +1,6 @@
 --- a/src/mVMC/CMakeLists.txt
 +++ b/src/mVMC/CMakeLists.txt
-@@ -21,24 +21,24 @@
+@@ -23,24 +23,24 @@
  
  link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../pfapack)
  
@@ -55,14 +55,6 @@
 -        ARCHIVE DESTINATION lib
 -        LIBRARY DESTINATION lib
 -        RUNTIME DESTINATION bin)
---- a/src/ComplexUHF/CMakeLists.txt
-+++ b/src/ComplexUHF/CMakeLists.txt
-@@ -20,4 +20,4 @@
- 
- add_executable(UHF ${SOURCES_UHF} ${SOURCES_sfmt})
- target_link_libraries(UHF ${LAPACK_LIBRARIES} m)
--
-+install(TARGETS UHF RUNTIME DESTINATION share/mvmc/tool)
 --- a/tool/CMakeLists.txt
 +++ b/tool/CMakeLists.txt
 @@ -10,13 +10,13 @@
@@ -82,3 +74,11 @@
 -install(FILES ${CMAKE_CURRENT_BINARY_DIR}/respack2wan90.py DESTINATION bin
 +install(FILES ${CMAKE_CURRENT_BINARY_DIR}/respack2wan90.py DESTINATION share/mvmc/tool
          PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
+--- a/src/ComplexUHF/CMakeLists.txt
++++ b/src/ComplexUHF/CMakeLists.txt
+@@ -20,4 +20,4 @@
+ 
+ add_executable(UHF ${SOURCES_UHF} ${SOURCES_sfmt})
+ target_link_libraries(UHF ${LAPACK_LIBRARIES} m)
+-install(TARGETS UHF RUNTIME DESTINATION bin)
++install(TARGETS UHF RUNTIME DESTINATION share/mvmc/tool)
