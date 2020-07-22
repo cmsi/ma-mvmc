@@ -1,0 +1,2 @@
+cmake.patch
+omp-workaround.patch
