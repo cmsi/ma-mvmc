@@ -1,6 +1,6 @@
 --- a/src/mVMC/CMakeLists.txt
 +++ b/src/mVMC/CMakeLists.txt
-@@ -23,24 +23,24 @@
+@@ -22,28 +22,28 @@
  
  link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../pfapack)
  
@@ -8,16 +8,22 @@
 -target_link_libraries(vmcdry.out StdFace m)
 -add_executable(vmc.out ${SOURCES_vmcmain} ${SOURCES_sfmt})
 -target_link_libraries(vmc.out StdFace)
--target_link_libraries(vmc.out pfapack StdFace ${LAPACK_LIBRARIES} m)
+-target_link_libraries(vmc.out pfapack)
 +add_executable(vmcdry vmcdry.c)
 +target_link_libraries(vmcdry StdFace m)
 +add_executable(vmc ${SOURCES_vmcmain} ${SOURCES_sfmt})
 +target_link_libraries(vmc StdFace)
-+target_link_libraries(vmc pfapack StdFace ${LAPACK_LIBRARIES} m)
++target_link_libraries(vmc pfapack)
+ if(PFAFFIAN_BLOCKED)
+-  target_link_libraries(vmc.out pfupdates blis pthread)
++  target_link_libraries(vmc pfupdates blis pthread)
+ endif(PFAFFIAN_BLOCKED)
+-target_link_libraries(vmc.out ${LAPACK_LIBRARIES} m)
++target_link_libraries(vmc ${LAPACK_LIBRARIES} m)
  
  if(USE_SCALAPACK)
-   string(REGEX REPLACE "-L[ ]+" "-L" sc_libs ${SCALAPACK_LIBRARIES})
-   string(REGEX REPLACE "[ ]+" ";" sc_libs ${sc_libs})
+   string(REGEX REPLACE "-L[ ]+" "-L" sc_libs "${SCALAPACK_LIBRARIES}")
+   string(REGEX REPLACE "[ ]+" ";" sc_libs "${sc_libs}")
    foreach(sc_lib IN LISTS sc_libs)
 -    target_link_libraries(vmc.out ${sc_lib})
 +    target_link_libraries(vmc ${sc_lib})
@@ -36,25 +42,26 @@
  add_definitions(-D_mVMC)
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -13,7 +13,7 @@
+@@ -14,7 +14,7 @@
  endif(NOT CMAKE_BUILD_TYPE)
  message(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
  
 -option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 +option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
- enable_language(C Fortran)
  
- set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
---- a/src/pfapack/CMakeLists.txt
-+++ b/src/pfapack/CMakeLists.txt
-@@ -8,7 +8,3 @@
- include_directories(${MPI_Fortran_INCLUDE_PATH})
- add_library(pfapack ${SOURCES_PFAPACK})
- target_link_libraries(pfapack ${MPI_Fortran_LIBRARIES} ${LAPACK_LIBRARIES})
--install(TARGETS pfapack
--        ARCHIVE DESTINATION lib
--        LIBRARY DESTINATION lib
--        RUNTIME DESTINATION bin)
+ option(GIT_SUBMODULE_UPDATE "execute `git submodule update` automatically" ON)
+ enable_language(C Fortran)
+--- a/src/pfapack/fortran/CMakeLists.txt
++++ b/src/pfapack/fortran/CMakeLists.txt
+@@ -10,8 +10,3 @@
+ INCLUDE_DIRECTORIES(${MPI_Fortran_INCLUDE_PATH})
+ ADD_LIBRARY(pfapack ${SOURCES_PFAPACK})
+ TARGET_LINK_LIBRARIES(pfapack ${MPI_Fortran_LIBRARIES} ${LAPACK_LIBRARIES})
+-INSTALL(TARGETS pfapack
+-    ARCHIVE DESTINATION lib
+-    LIBRARY DESTINATION lib
+-    RUNTIME DESTINATION bin)
+-
 --- a/tool/CMakeLists.txt
 +++ b/tool/CMakeLists.txt
 @@ -10,13 +10,13 @@
