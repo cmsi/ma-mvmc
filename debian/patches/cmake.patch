@@ -89,3 +89,35 @@
  target_link_libraries(UHF ${LAPACK_LIBRARIES} m)
 -install(TARGETS UHF RUNTIME DESTINATION bin)
 +install(TARGETS UHF RUNTIME DESTINATION share/mvmc/tool)
+--- a/src/StdFace/src/CMakeLists.txt
++++ b/src/StdFace/src/CMakeLists.txt
+@@ -17,20 +17,20 @@
+ add_library(StdFace STATIC ChainLattice.c HoneycombLattice.c SquareLattice.c StdFace_main.c StdFace_ModelUtil.c TriangularLattice.c Ladder.c Kagome.c Orthorhombic.c Pyrochlore.c Wannier90.c FCOrtho.c setmemory.c)
+ 
+ if (UHF)
+-   add_executable(uhf_dry.out dry.c)
+-   target_link_libraries(uhf_dry.out StdFace m)
+-   install(TARGETS uhf_dry.out RUNTIME DESTINATION bin)
++   add_executable(uhf_dry dry.c)
++   target_link_libraries(uhf_dry StdFace m)
++   install(TARGETS uhf_dry RUNTIME DESTINATION bin)
+ endif(UHF)
+ 
+ if (MVMC)
+-   add_executable(mvmc_dry.out dry.c)
+-   target_link_libraries(mvmc_dry.out StdFace m)
+-   install(TARGETS mvmc_dry.out RUNTIME DESTINATION bin)
++   add_executable(mvmc_dry dry.c)
++   target_link_libraries(mvmc_dry StdFace m)
++   install(TARGETS mvmc_dry RUNTIME DESTINATION bin)
+ endif(MVMC)
+ 
+ if (HPHI)
+-   add_executable(hphi_dry.out dry.c)
+-   target_link_libraries(hphi_dry.out StdFace m)
+-   install(TARGETS hphi_dry.out RUNTIME DESTINATION bin)
++   add_executable(hphi_dry dry.c)
++   target_link_libraries(hphi_dry StdFace m)
++   install(TARGETS hphi_dry RUNTIME DESTINATION bin)
+ endif(HPHI)
+ 
